@@ -1,21 +1,5 @@
 const prompt = require('prompt-sync')({ sigint: true });
 
-//Requisitos do sistema
-// Criação dos livros:
-// -Adicionar um novo livro ao sistema com os seguintes atributos: id, title, author, year, genre, year_new_versions (array).
-// Leitura (listagem dos livros):
-// -Listar todos os livros cadastrados no sistema.
-// Atualização dos livros:
-// -Atualizar os dados de um livro existente com base no seu id.
-// Deleção de livros:
-// -Remover um livro do sistema com base no seu id.
-// Busca de livro:
-// -Implementar uma função de busca com diferentes critérios:
-// -Por title
-// -Por author
-// -Por yar
-// -Por genre
-
 let livros = [];
 let ultimoID = 4;
 
