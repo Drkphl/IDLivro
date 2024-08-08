@@ -17,7 +17,7 @@ const prompt = require('prompt-sync')({ sigint: true });
 // -Por genre
 
 let livros = [];
-let ultimoID = 1;
+let ultimoID = 4;
 
 const modelo = (ID) => {
     let title = prompt('titulo do Livro: ');
@@ -32,7 +32,8 @@ const modelo = (ID) => {
         while (true) {
             let versions = Number(prompt("em que ano foram lançadas ? (Caso tenha finalizado, digite 'fim') "));
 
-            if (versions === 'fim') {
+            if (isNaN(versions)) {
+                op = 'nao';
                 break;
             } else {
                 yearNewVersions.push(versions);
@@ -85,14 +86,16 @@ const listarLivros = () => {
     } else {
         livros.forEach((livro) => {
             console.log(
-                `ID: ${livro.ID}. 
+                `
+            ID: ${livro.ID}.
             Titulo: ${livro.title}, 
             Autor: ${livro.author}, 
             Ano de Lançamento: ${livro.year}
             Genero: ${livro.genre}`
             );
+
             livro.yearNewVersions.forEach((versao, indice) => {
-                console.log(`Versão: ${indice + 1}: ${versao}`);
+                console.log(`Revisão: ${indice + 1}: ${versao}`);
             });
         });
     }
@@ -135,9 +138,55 @@ const deletarLivro = () => {
     });
 };
 
+const findLivro = () => {
+    console.log(`
+    1 - Titulo
+    2- Autor
+    3- Ano
+    4- Genero`);
+
+    let op = Number(prompt('o que gostaria de procurar?:'));
+
+    let Value;
+    let key;
+
+    switch (op) {
+        case 1:
+            key = 'title';
+            Value = prompt('qual titulo deseja procurar?');
+            break;
+        case 2:
+            key = 'author';
+            Value = prompt('qual o author deseja procurar? ');
+            break;
+        case 3:
+            key = 'genre';
+            Value = prompt('qual o genero que deseja procurar? ');
+            break;
+        default:
+            console.log('opção invalida');
+            return;
+    }
+    const results = livros.filter((livro) => livro[key] == Value);
+
+    if (results.length > 0) {
+        results.forEach((livro) => {
+            console.log(
+                `ID: ${livro.ID},
+                Titulo: ${livro.title},
+                Autor: ${livro.author},
+                Ano de Lançamento: ${livro.year}
+                Genero: ${livro.genre}
+                `
+            );
+        });
+    }
+};
+
 module.exports = {
     adicionarLivro,
     listarLivros,
     atualizarLivro,
     deletarLivro,
+    findLivro,
 };

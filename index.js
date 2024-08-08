@@ -1,6 +1,6 @@
 const prompt = require('prompt-sync')({ sigint: true });
 
-const { adicionarLivro, listarLivros, atualizarLivro, deletarLivro } = require('./modules.js');
+const { adicionarLivro, listarLivros, atualizarLivro, deletarLivro, findLivro } = require('./modules.js');
 
 while (true) {
     console.log(`
@@ -9,6 +9,7 @@ while (true) {
     2.Listar livros registrados
     3.Atualizar um livro
     4.Deletar um livro
+    5.Procurar
     0.Sair
     `);
 
@@ -26,6 +27,9 @@ while (true) {
             break;
         case 4:
             deletarLivro();
+            break;
+        case 5:
+            findLivro();
             break;
         case 0:
             console.log('Saindo do menu!');
